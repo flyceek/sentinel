@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 import com.alibaba.csp.sentinel.dashboard.client.SentinelApiClient;
 import com.alibaba.csp.sentinel.dashboard.discovery.AppManagement;
 import com.alibaba.csp.sentinel.dashboard.discovery.MachineInfo;
+import com.alibaba.csp.sentinel.dashboard.rule.apollo.ApolloConfigUtil;
 import com.alibaba.csp.sentinel.util.StringUtil;
 
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.FlowRuleEntity;
@@ -45,6 +46,7 @@ public class FlowRuleApiProvider implements DynamicRuleProvider<List<FlowRuleEnt
         if (StringUtil.isBlank(appName)) {
             return new ArrayList<>();
         }
+
         List<MachineInfo> list = appManagement.getDetailApp(appName).getMachines()
             .stream()
             .filter(MachineInfo::isHealthy)
