@@ -19,19 +19,19 @@ sentinel:
 
 auth:
   filter:
-    exclude-urls: /,/auth/login,/auth/logout,/registry/machine,/version
-    exclude-url-suffixes: htm,html,js,css,map,ico,ttf,woff,png
+    exclude-urls: '/,/auth/login,/auth/logout,/registry/machine,/version'
+    exclude-url-suffixes: 'htm,html,js,css,map,ico,ttf,woff,png'
   password: sentinel
   username: sentinel
 
 logging:
-  file: ${user.home}/logs/csp/sentinel-dashboard.log
+  file: '${user.home}/logs/csp/sentinel-dashboard.log'
   level:
     org:
       springframework:
         web: INFO
   pattern:
-    file: %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
 
 apollo:
   cluster: default
