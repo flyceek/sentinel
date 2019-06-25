@@ -37,7 +37,7 @@ public abstract class AbstractApolloRulePublisher<T extends RuleEntity> extends 
 
     @Override
     public void publish(String app, List<T> rules) throws Exception {
-        String flowDataId = ApolloConfigUtil.getFlowDataId(property.appId);
+        String dataId = getRuleDateId(app);
 
         AssertUtil.notEmpty(app, "app name cannot be empty");
         if (rules == null) {
@@ -58,7 +58,7 @@ public abstract class AbstractApolloRulePublisher<T extends RuleEntity> extends 
         // 请视情况使用
 
         OpenItemDTO openItemDTO = new OpenItemDTO();
-        openItemDTO.setKey(flowDataId);
+        openItemDTO.setKey(dataId);
         openItemDTO.setValue(converter.convert(rules));
         openItemDTO.setComment("modify by sentinel-dashboard");
         openItemDTO.setDataChangeCreatedBy("apollo");
@@ -74,4 +74,6 @@ public abstract class AbstractApolloRulePublisher<T extends RuleEntity> extends 
     }
 
     protected abstract List<T> prepareRules(List<T> rules);
+
+    protected abstract String getRuleDateId(String appName);
 }

@@ -45,4 +45,9 @@ public class FlowRuleApolloPublisher extends AbstractApolloRulePublisher<FlowRul
         }
         return rules;
     }
+
+    @Override
+    protected String getRuleDateId(String appName) {
+        return ApolloConfigUtil.getFlowDataId(getProperty().appId);
+    }
 }

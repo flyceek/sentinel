@@ -20,4 +20,9 @@ public class DegradeRuleApolloPublisher extends AbstractApolloRulePublisher<Degr
     protected List<DegradeRuleEntity> prepareRules(List<DegradeRuleEntity> rules) {
         return rules;
     }
+
+    @Override
+    protected String getRuleDateId(String appName) {
+        return ApolloConfigUtil.getDegradeDataId(getProperty().appId);
+    }
 }
