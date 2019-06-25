@@ -17,6 +17,7 @@ package com.alibaba.csp.sentinel.dashboard.repository.metric;
 
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.MetricEntity;
 
+import com.alibaba.csp.sentinel.dashboard.metric.InMemoryMetricsRepository;
 import org.assertj.core.util.Lists;
 import org.junit.After;
 import org.junit.Before;

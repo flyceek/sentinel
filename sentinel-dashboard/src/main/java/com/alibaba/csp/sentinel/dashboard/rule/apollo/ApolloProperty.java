@@ -23,4 +23,5 @@ public class ApolloProperty {
 
     @Value("${apollo.portalUrl}")
     public String portalUrl;
+
 }

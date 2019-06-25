@@ -1,3 +1,11 @@
+server:
+  port: 8085
+  address: 10.104.5.38
+  servlet:
+    context-path: /
+    session:
+      timeout: 7200
+
 spring:
   application:
     name: agency
@@ -6,32 +14,40 @@ spring:
       force: true
       charset: UTF-8
       enabled: true
+#  cloud:
+#    sentinel:
+#      transport:
+#        port: 8719
+#        dashboard: ${server.address}:${server.port}
 
-server:
-  port: 8083
-  address: 10.104.9.91
-  servlet:
-    context-path: /
+csp:
+  sentinel:
+    dashboard:
+      server: ${server.address}:${server.port}
+    api:
+      port: 8719
+    heartbeat:
+      interval:
+        ms: 10000
 
 sentinel:
-  dashboard:
-    version: ${project.version}
+  #    autoRemoveMachineMillis: 30000
+  version: ${project.version}
 
 auth:
   filter:
     exclude-urls: '/,/auth/login,/auth/logout,/registry/machine,/version'
     exclude-url-suffixes: 'htm,html,js,css,map,ico,ttf,woff,png'
-  password: sentinel
   username: sentinel
+  password: sentinel
 
 logging:
   file: '${user.home}/logs/csp/sentinel-dashboard.log'
   level:
-    org:
-      springframework:
-        web: INFO
+    org.springframework.web: INFO
   pattern:
     file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
+    console: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
 
 apollo:
   cluster: default
