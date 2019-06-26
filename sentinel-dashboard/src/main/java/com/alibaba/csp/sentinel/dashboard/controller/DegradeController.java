@@ -57,9 +57,6 @@ public class DegradeController {
     private InMemDegradeRuleStore repository;
 
     @Autowired
-    private SentinelApiClient sentinelApiClient;
-
-    @Autowired
     @Qualifier("degradeRuleApolloProvider")
     private DynamicRuleProvider<List<DegradeRuleEntity>> ruleProvider;
 
