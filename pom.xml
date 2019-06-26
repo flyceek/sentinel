@@ -41,7 +41,7 @@
     </properties>
 
     <modules>
-         <module>sentinel-dashboard</module>
+         <module>sentinel-dashboard-apollo</module>
     </modules>
 
 
