@@ -157,7 +157,7 @@ public class ParamFlowRuleController {
             return unsupportedVersion();
         }
         entity.setId(null);
-        entity.getRule().setResource(entity.getResource().trim());
+        entity.getRule().setResource(entity.getRule().getResource().trim());
         Date date = new Date();
         entity.setGmtCreate(date);
         entity.setGmtModified(date);
@@ -194,22 +194,22 @@ public class ParamFlowRuleController {
         if (entity.getRule() == null) {
             return Result.ofFail(-1, "rule can't be null");
         }
-        if (StringUtil.isBlank(entity.getResource())) {
+        if (StringUtil.isBlank(entity.getRule().getResource())) {
             return Result.ofFail(-1, "resource name cannot be null or empty");
         }
-        if (entity.getCount() < 0) {
+        if (entity.getRule().getCount() < 0) {
             return Result.ofFail(-1, "count should be valid");
         }
-        if (entity.getGrade() != RuleConstant.FLOW_GRADE_QPS) {
+        if (entity.getRule().getGrade() != RuleConstant.FLOW_GRADE_QPS) {
             return Result.ofFail(-1, "Unknown mode (blockGrade) for parameter flow control");
         }
-        if (entity.getParamIdx() == null || entity.getParamIdx() < 0) {
+        if (entity.getRule().getParamIdx() == null || entity.getRule().getParamIdx() < 0) {
             return Result.ofFail(-1, "paramIdx should be valid");
         }
-        if (entity.getDurationInSec() <= 0) {
+        if (entity.getRule().getDurationInSec() <= 0) {
             return Result.ofFail(-1, "durationInSec should be valid");
         }
-        if (entity.getControlBehavior() < 0) {
+        if (entity.getRule().getControlBehavior() < 0) {
             return Result.ofFail(-1, "controlBehavior should be valid");
         }
         return null;
