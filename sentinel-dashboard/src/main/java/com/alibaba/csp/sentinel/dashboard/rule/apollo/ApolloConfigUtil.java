@@ -23,7 +23,9 @@ public final class ApolloConfigUtil {
 
     public static final String FLOW_DATA_ID_POSTFIX = "-flow-rules";
     public static final String DEGRADE_DATA_ID_POSTFIX = "-degrade-rules";
-    public static final String PARAM_DATA_ID_POSTFIX = "-paramflow-rules";
+    public static final String PARAM_FLOW_DATA_ID_POSTFIX = "-paramflow-rules";
+    public static final String SYSTEM_DATA_ID_POSTFIX = "-system-rules";
+    public static final String AUTH_DATA_ID_POSTFIX = "-auth-rules";
 
     private ApolloConfigUtil() {
     }
@@ -36,7 +38,15 @@ public final class ApolloConfigUtil {
         return String.format("%s%s", appName, DEGRADE_DATA_ID_POSTFIX);
     }
 
-    public static String getParamDataId(String appName){
-        return String.format("%s%s", appName, PARAM_DATA_ID_POSTFIX);
+    public static String getParamFlowDataId(String appName){
+        return String.format("%s%s", appName, PARAM_FLOW_DATA_ID_POSTFIX);
+    }
+
+    public static String getSystemDataId(String appName){
+        return String.format("%s%s", appName, SYSTEM_DATA_ID_POSTFIX);
+    }
+
+    public static String getAuthDataId(String appName){
+        return String.format("%s%s", appName, AUTH_DATA_ID_POSTFIX);
     }
 }

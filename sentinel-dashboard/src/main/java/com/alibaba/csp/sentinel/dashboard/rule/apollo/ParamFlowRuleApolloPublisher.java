@@ -23,6 +23,6 @@ public class ParamFlowRuleApolloPublisher extends AbstractApolloRulePublisher<Pa
 
     @Override
     protected String getRuleDateId(String appName) {
-        return ApolloConfigUtil.getParamDataId(getProperty().appId);
+        return ApolloConfigUtil.getParamFlowDataId(getProperty().appId);
     }
 }
