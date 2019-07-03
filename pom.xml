@@ -14,34 +14,35 @@
 
     <properties>
         <!-- Compile libs -->
-<!--        <fastjson.version>1.2.56</fastjson.version>-->
+        <!--        <fastjson.version>1.2.56</fastjson.version>-->
 
-<!--        &lt;!&ndash; Test libs &ndash;&gt;-->
-<!--        <junit.version>4.12</junit.version>-->
-<!--        <mockito.version>2.21.0</mockito.version>-->
-<!--        <assertj.version>3.12.1</assertj.version>-->
-<!--        <awaitility.version>3.1.5</awaitility.version>-->
-<!--        <powermock.version>2.0.0</powermock.version>-->
+        <!--        &lt;!&ndash; Test libs &ndash;&gt;-->
+        <!--        <junit.version>4.12</junit.version>-->
+        <!--        <mockito.version>2.21.0</mockito.version>-->
+        <!--        <assertj.version>3.12.1</assertj.version>-->
+        <!--        <awaitility.version>3.1.5</awaitility.version>-->
+        <!--        <powermock.version>2.0.0</powermock.version>-->
 
-<!--        &lt;!&ndash; Build &ndash;&gt;-->
-<!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
-<!--        <java.source.version>1.7</java.source.version>-->
-<!--        <java.target.version>1.7</java.target.version>-->
-<!--        <java.encoding>UTF-8</java.encoding>-->
-<!--        <maven.compiler.version>3.8.0</maven.compiler.version>-->
-<!--        <maven.surefire.version>2.22.1</maven.surefire.version>-->
-<!--        <maven.source.version>3.0.1</maven.source.version>-->
-<!--        <maven.javadoc.version>3.0.1</maven.javadoc.version>-->
-<!--        <maven.deploy.version>2.8.2</maven.deploy.version>-->
-<!--        <maven.gpg.version>1.6</maven.gpg.version>-->
-<!--        <maven.jacoco.version>0.8.3</maven.jacoco.version>-->
-<!--        <maven.jar.version>3.1.0</maven.jar.version>-->
-<!--        <maven.pmd.version>3.8</maven.pmd.version>-->
-<!--        <sentinel.version>1.6.2</sentinel.version>-->
+        <!--        &lt;!&ndash; Build &ndash;&gt;-->
+        <!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+        <!--        <java.source.version>1.7</java.source.version>-->
+        <!--        <java.target.version>1.7</java.target.version>-->
+        <!--        <java.encoding>UTF-8</java.encoding>-->
+        <!--        <maven.compiler.version>3.8.0</maven.compiler.version>-->
+        <!--        <maven.surefire.version>2.22.1</maven.surefire.version>-->
+        <!--        <maven.source.version>3.0.1</maven.source.version>-->
+        <!--        <maven.javadoc.version>3.0.1</maven.javadoc.version>-->
+        <!--        <maven.deploy.version>2.8.2</maven.deploy.version>-->
+        <!--        <maven.gpg.version>1.6</maven.gpg.version>-->
+        <!--        <maven.jacoco.version>0.8.3</maven.jacoco.version>-->
+        <!--        <maven.jar.version>3.1.0</maven.jar.version>-->
+        <!--        <maven.pmd.version>3.8</maven.pmd.version>-->
+        <!--        <sentinel.version>1.6.2</sentinel.version>-->
     </properties>
 
     <modules>
-         <module>sentinel-dashboard-apollo</module>
+        <module>sentinel-dashboard-apollo</module>
+        <module>sentinel-client-apollo</module>
     </modules>
 
 
