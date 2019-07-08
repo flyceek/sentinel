@@ -41,6 +41,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -70,7 +71,10 @@ public class SystemController {
 
     @ResponseBody
     @RequestMapping("/rules.json")
-    Result<List<SystemRuleEntity>> queryMachineRules(HttpServletRequest request, String app, String ip, Integer port) {
+    Result<List<SystemRuleEntity>> queryMachineRules(HttpServletRequest request,
+                                                     @RequestParam String app,
+                                                     @RequestParam String ip,
+                                                     @RequestParam Integer port) {
         AuthUser authUser = authService.getAuthUser(request);
         authUser.authTarget(app, PrivilegeType.READ_RULE);
         if (StringUtil.isEmpty(app)) {
@@ -84,7 +88,8 @@ public class SystemController {
         }
         try {
 //            List<SystemRuleEntity> rules = sentinelApiClient.fetchSystemRuleOfMachine(app, ip, port);
-            List<SystemRuleEntity> rules = ruleProvider.getRules(app);
+//            List<SystemRuleEntity> rules = ruleProvider.getRules(app);
+            List<SystemRuleEntity> rules = ruleProvider.getRules(app,ip,port);
             rules = repository.saveAll(rules);
             return Result.ofSuccess(rules);
         } catch (Throwable throwable) {

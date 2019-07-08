@@ -42,6 +42,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -69,7 +70,10 @@ public class DegradeController {
 
     @ResponseBody
     @RequestMapping("/rules.json")
-    public Result<List<DegradeRuleEntity>> queryMachineRules(HttpServletRequest request, String app, String ip, Integer port) {
+    public Result<List<DegradeRuleEntity>> queryMachineRules(HttpServletRequest request,
+                                                             @RequestParam String app,
+                                                             @RequestParam String ip,
+                                                             @RequestParam Integer port) {
         AuthUser authUser = authService.getAuthUser(request);
         authUser.authTarget(app, PrivilegeType.READ_RULE);
 
@@ -84,7 +88,8 @@ public class DegradeController {
         }
         try {
 //            List<DegradeRuleEntity> rules = sentinelApiClient.fetchDegradeRuleOfMachine(app, ip, port);
-            List<DegradeRuleEntity> rules = ruleProvider.getRules(app);
+//            List<DegradeRuleEntity> rules = ruleProvider.getRules(app);
+            List<DegradeRuleEntity> rules = ruleProvider.getRules(app,ip,port);
             rules = repository.saveAll(rules);
             return Result.ofSuccess(rules);
         } catch (Throwable throwable) {

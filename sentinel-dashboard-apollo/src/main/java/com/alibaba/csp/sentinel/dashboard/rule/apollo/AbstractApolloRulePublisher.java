@@ -1,6 +1,5 @@
 package com.alibaba.csp.sentinel.dashboard.rule.apollo;
 
-import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.FlowRuleEntity;
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.RuleEntity;
 import com.alibaba.csp.sentinel.dashboard.rule.AbstractRulePublisher;
 import com.alibaba.csp.sentinel.datasource.Converter;
@@ -59,7 +58,7 @@ public abstract class AbstractApolloRulePublisher<T extends RuleEntity> extends 
 
         OpenItemDTO openItemDTO = new OpenItemDTO();
         openItemDTO.setKey(dataId);
-        openItemDTO.setValue(converter.convert(rules));
+        openItemDTO.setValue(serializeRules(rules));
         openItemDTO.setComment("modify by sentinel-dashboard");
         openItemDTO.setDataChangeCreatedBy("apollo");
         apiClient.createOrUpdateItem(property.appId, property.env, property.cluster, property.nameSpace, openItemDTO);
@@ -76,4 +75,8 @@ public abstract class AbstractApolloRulePublisher<T extends RuleEntity> extends 
     protected abstract List<T> prepareRules(List<T> rules);
 
     protected abstract String getRuleDateId(String appName);
+
+    protected String  serializeRules(List<T> rules){
+        return converter.convert(rules);
+    }
 }

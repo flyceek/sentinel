@@ -124,7 +124,8 @@ public class ParamFlowRuleController {
 //                .thenApply(repository::saveAll)
 //                .thenApply(Result::ofSuccess)
 //                .get();
-            List<ParamFlowRuleEntity> rules = ruleProvider.getRules(app);
+//            List<ParamFlowRuleEntity> rules = ruleProvider.getRules(app);
+            List<ParamFlowRuleEntity> rules = ruleProvider.getRules(app,ip,port);
             rules = repository.saveAll(rules);
             return Result.ofSuccess(rules);
         } catch (ExecutionException ex) {

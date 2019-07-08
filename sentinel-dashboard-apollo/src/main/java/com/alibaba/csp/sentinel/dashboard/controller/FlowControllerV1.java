@@ -94,7 +94,8 @@ public class FlowControllerV1 {
         }
         try {
 //            List<FlowRuleEntity> rules = sentinelApiClient.fetchFlowRuleOfMachine(app, ip, port);
-            List<FlowRuleEntity> rules = ruleProvider.getRules(app);
+//            List<FlowRuleEntity> rules = ruleProvider.getRules(app);
+            List<FlowRuleEntity> rules = ruleProvider.getRules(app,ip,port);
             if (rules != null && !rules.isEmpty()) {
                 for (FlowRuleEntity entity : rules) {
                     entity.setApp(app);

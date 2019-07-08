@@ -17,10 +17,14 @@ package com.alibaba.csp.sentinel.dashboard.rule.apollo;
 
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.FlowRuleEntity;
 import com.alibaba.csp.sentinel.datasource.Converter;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
+import com.alibaba.fastjson.JSON;
 import com.ctrip.framework.apollo.openapi.client.ApolloOpenApiClient;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author hantianwei@gmail.com
@@ -35,19 +39,28 @@ public class FlowRuleApolloPublisher extends AbstractApolloRulePublisher<FlowRul
 
     @Override
     protected List<FlowRuleEntity> prepareRules(List<FlowRuleEntity> rules) {
-        for (FlowRuleEntity ruleEntity : rules) {
-            ruleEntity.setId(null);
-            ruleEntity.setApp(null);
-            ruleEntity.setGmtModified(null);
-            ruleEntity.setGmtCreate(null);
-            ruleEntity.setIp(null);
-            ruleEntity.setPort(null);
-        }
+//        for (FlowRuleEntity ruleEntity : rules) {
+//            ruleEntity.setId(null);
+//            ruleEntity.setApp(null);
+//            ruleEntity.setGmtModified(null);
+//            ruleEntity.setGmtCreate(null);
+//            ruleEntity.setIp(null);
+//            ruleEntity.setPort(null);
+//        }
         return rules;
     }
 
     @Override
     protected String getRuleDateId(String appName) {
         return ApolloConfigUtil.getFlowDataId(getProperty().appId);
+    }
+
+    @Override
+    protected String serializeRules(List<FlowRuleEntity> rules) {
+        List<FlowRule> flowRules =rules.stream()
+                .map(x->x.toRule())
+                .collect(Collectors.toList());
+        String flowRluesString= JSON.toJSONString(flowRules);
+        return flowRluesString;
     }
 }

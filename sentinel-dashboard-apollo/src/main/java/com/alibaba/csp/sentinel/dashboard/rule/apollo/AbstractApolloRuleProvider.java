@@ -15,12 +15,12 @@ public abstract class AbstractApolloRuleProvider<T extends RuleEntity> extends A
 
     protected ApolloProperty property;
     protected ApolloOpenApiClient apiClient;
-    protected Converter<String, List<T>> converter;
+    protected Converter<String, List<T>> ruleEntityDecoder;
 
-    public AbstractApolloRuleProvider(ApolloProperty property,ApolloOpenApiClient apiClient,Converter<String, List<T>> converter){
-        this.property=property;
-        this.apiClient=apiClient;
-        this.converter=converter;
+    public AbstractApolloRuleProvider(ApolloProperty property, ApolloOpenApiClient apiClient, Converter<String, List<T>> ruleEntityDecoder) {
+        this.property = property;
+        this.apiClient = apiClient;
+        this.ruleEntityDecoder = ruleEntityDecoder;
     }
 
     public ApolloProperty getProperty() {
@@ -31,26 +31,45 @@ public abstract class AbstractApolloRuleProvider<T extends RuleEntity> extends A
         return apiClient;
     }
 
-    public Converter<String, List<T>> getConverter() {
-        return converter;
+    @Override
+    public List<T> getRules(String appName, String ip, Integer port) throws Exception {
+        String rulsString = getRulesString(appName);
+
+        if (StringUtil.isEmpty(rulsString)) {
+            return new ArrayList<>();
+        }
+        return parseRules(rulsString, appName, ip, port);
     }
 
     @Override
     public List<T> getRules(String appName) throws Exception {
+        String rulsString = getRulesString(appName);
+
+        if (StringUtil.isEmpty(rulsString)) {
+            return new ArrayList<>();
+        }
+        return parseRules(rulsString);
+    }
+
+    protected String getRulesString(String appName) {
         String dataId = getRuleDateId(appName);
         OpenNamespaceDTO openNamespaceDTO = apiClient.getNamespace(property.appId, property.env, property.cluster, property.nameSpace);
-        String rules = openNamespaceDTO
+        String rulsString = openNamespaceDTO
                 .getItems()
                 .stream()
                 .filter(p -> p.getKey().equals(dataId))
                 .map(OpenItemDTO::getValue)
                 .findFirst()
                 .orElse("");
+        return rulsString;
+    }
 
-        if (StringUtil.isEmpty(rules)) {
-            return new ArrayList<>();
-        }
-        return converter.convert(rules);
+    protected List<T> parseRules(String rulsString) {
+        return ruleEntityDecoder.convert(rulsString);
+    }
+
+    protected List<T> parseRules(String rulsString, String appName, String ip, Integer port) {
+        return parseRules(rulsString);
     }
 
     protected abstract String getRuleDateId(String appName);

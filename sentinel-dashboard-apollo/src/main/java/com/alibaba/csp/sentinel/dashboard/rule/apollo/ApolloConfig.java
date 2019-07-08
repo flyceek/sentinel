@@ -15,8 +15,10 @@
  */
 package com.alibaba.csp.sentinel.dashboard.rule.apollo;
 
+import com.alibaba.csp.sentinel.dashboard.datasource.entity.MachineEntity;
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.*;
 import com.alibaba.csp.sentinel.datasource.Converter;
+import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.fastjson.JSON;
 import com.ctrip.framework.apollo.openapi.client.ApolloOpenApiClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +38,11 @@ public class ApolloConfig {
     private ApolloProperty property;
 
     @Bean
+    public Converter<List<FlowRule>, String> flowRuleEncoder() {
+        return JSON::toJSONString;
+    }
+
+    @Bean
     public Converter<List<FlowRuleEntity>, String> flowRuleEntityEncoder() {
         return JSON::toJSONString;
     }
@@ -43,6 +50,11 @@ public class ApolloConfig {
     @Bean
     public Converter<String, List<FlowRuleEntity>> flowRuleEntityDecoder() {
         return s -> JSON.parseArray(s, FlowRuleEntity.class);
+    }
+
+    @Bean
+    public Converter<String,List<FlowRule>> flowRuleDecoder() {
+        return s -> JSON.parseArray(s, FlowRule.class);
     }
 
 

@@ -58,4 +58,5 @@ public class FlowRuleApiProvider implements DynamicRuleProvider<List<FlowRuleEnt
             return sentinelApiClient.fetchFlowRuleOfMachine(machine.getApp(), machine.getIp(), machine.getPort());
         }
     }
+
 }

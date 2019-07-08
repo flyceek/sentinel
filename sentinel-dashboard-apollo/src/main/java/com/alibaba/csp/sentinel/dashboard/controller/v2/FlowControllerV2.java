@@ -72,7 +72,10 @@ public class FlowControllerV2 {
     private AuthService<HttpServletRequest> authService;
 
     @GetMapping("/rules")
-    public Result<List<FlowRuleEntity>> apiQueryMachineRules(HttpServletRequest request, @RequestParam String app) {
+    public Result<List<FlowRuleEntity>> apiQueryMachineRules(HttpServletRequest request,
+                                                             @RequestParam String app,
+                                                             @RequestParam String ip,
+                                                             @RequestParam Integer port) {
         AuthUser authUser = authService.getAuthUser(request);
         authUser.authTarget(app, PrivilegeType.READ_RULE);
 
@@ -80,7 +83,8 @@ public class FlowControllerV2 {
             return Result.ofFail(-1, "app can't be null or empty");
         }
         try {
-            List<FlowRuleEntity> rules = ruleProvider.getRules(app);
+//            List<FlowRuleEntity> rules = ruleProvider.getRules(app);
+            List<FlowRuleEntity> rules = ruleProvider.getRules(app,ip,port);
             if (rules != null && !rules.isEmpty()) {
                 for (FlowRuleEntity entity : rules) {
                     entity.setApp(app);
