@@ -57,8 +57,4 @@ public class AuthorityRuleEntity extends AbstractRuleEntity<AuthorityRule> {
         return rule.getStrategy();
     }
 
-    @Override
-    public AbstractRuleEntity fromRule(String app, String ip, Integer port, AuthorityRule rule) {
-        return AuthorityRuleEntity.fromAuthorityRule(app,ip,port,rule);
-    }
 }

@@ -45,11 +45,6 @@ public class ParamFlowRuleEntity extends AbstractRuleEntity<ParamFlowRule> {
         return entity;
     }
 
-    @Override
-    public AbstractRuleEntity fromRule(String app, String ip, Integer port, ParamFlowRule rule) {
-        return ParamFlowRuleEntity.fromAuthorityRule(app,ip,port,rule);
-    }
-
 //    @JsonIgnore
 //    public String getLimitApp() {
 //        return rule.getLimitApp();

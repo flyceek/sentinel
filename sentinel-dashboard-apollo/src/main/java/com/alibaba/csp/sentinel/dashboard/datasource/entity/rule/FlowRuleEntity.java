@@ -249,9 +249,4 @@ public class FlowRuleEntity extends AbstractRuleEntity<FlowRule> {
         return flowRule;
     }
 
-    @Override
-    public AbstractRuleEntity fromRule(String app, String ip, Integer port, FlowRule rule) {
-        return FlowRuleEntity.fromFlowRule(app,ip,port,rule);
-    }
-
 }

@@ -147,8 +147,4 @@ public class SystemRuleEntity extends AbstractRuleEntity<SystemRule> {
         return rule;
     }
 
-    @Override
-    public AbstractRuleEntity fromRule(String app, String ip, Integer port, SystemRule rule) {
-        return SystemRuleEntity.fromSystemRule(app,ip,port,rule);
-    }
 }

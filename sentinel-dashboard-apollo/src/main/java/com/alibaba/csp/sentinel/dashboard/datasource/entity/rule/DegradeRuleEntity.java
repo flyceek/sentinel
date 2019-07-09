@@ -159,8 +159,4 @@ public class DegradeRuleEntity extends AbstractRuleEntity<DegradeRule> {
         return rule;
     }
 
-    @Override
-    public AbstractRuleEntity fromRule(String app, String ip, Integer port, DegradeRule rule) {
-        return DegradeRuleEntity.fromDegradeRule(app,ip,port,rule);
-    }
 }

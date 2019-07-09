@@ -110,5 +110,4 @@ public abstract class AbstractRuleEntity<T extends AbstractRule> implements Rule
         return rule;
     }
 
-    public abstract AbstractRuleEntity fromRule(String app, String ip, Integer port ,T rule);
 }
