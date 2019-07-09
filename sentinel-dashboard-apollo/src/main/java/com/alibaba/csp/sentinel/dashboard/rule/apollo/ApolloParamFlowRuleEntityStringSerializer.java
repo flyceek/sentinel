@@ -3,6 +3,7 @@ package com.alibaba.csp.sentinel.dashboard.rule.apollo;
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.ParamFlowRuleEntity;
 import com.alibaba.csp.sentinel.dashboard.rule.StringSerialRuleEntity;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
+//import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowRule;
 import com.alibaba.fastjson.JSON;
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ApolloParamFlowRuleEntityStringSerializer extends AbstractApolloRuleEntityStringSerializer<ParamFlowRuleEntity,ParamFlowRule> {
+public class ApolloParamFlowRuleEntityStringSerializer extends AbstractApolloRuleEntityStringSerializer<ParamFlowRuleEntity, ParamFlowRule> {
     @Override
     protected Class<ParamFlowRule> getRuleClass() {
         return ParamFlowRule.class;
