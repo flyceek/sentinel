@@ -2,7 +2,7 @@ package com.alibaba.csp.sentinel.dashboard.rule.apollo;
 
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.RuleEntity;
 import com.alibaba.csp.sentinel.dashboard.rule.AbstractRulePublisher;
-import com.alibaba.csp.sentinel.datasource.Converter;
+import com.alibaba.csp.sentinel.dashboard.rule.RuleEntityStringSerializer;
 import com.alibaba.csp.sentinel.util.AssertUtil;
 import com.ctrip.framework.apollo.openapi.client.ApolloOpenApiClient;
 import com.ctrip.framework.apollo.openapi.dto.NamespaceReleaseDTO;
@@ -13,21 +13,17 @@ import java.util.List;
 public abstract class AbstractApolloRulePublisher<T extends RuleEntity> extends AbstractRulePublisher<T> {
 
     protected ApolloOpenApiClient apiClient;
-    protected Converter<List<T>, String> converter;
     protected ApolloProperty property;
+    protected RuleEntityStringSerializer<T> serializer;
 
-    public AbstractApolloRulePublisher(ApolloOpenApiClient apiClient, Converter<List<T>, String> converter, ApolloProperty property) {
+    public AbstractApolloRulePublisher(ApolloOpenApiClient apiClient, RuleEntityStringSerializer<T> serializer, ApolloProperty property) {
         this.apiClient = apiClient;
-        this.converter = converter;
+        this.serializer = serializer;
         this.property = property;
     }
 
     public ApolloOpenApiClient getApiClient() {
         return apiClient;
-    }
-
-    public Converter<List<T>, String> getConverter() {
-        return converter;
     }
 
     public ApolloProperty getProperty() {
@@ -77,6 +73,6 @@ public abstract class AbstractApolloRulePublisher<T extends RuleEntity> extends 
     protected abstract String getRuleDateId(String appName);
 
     protected String  serializeRules(List<T> rules){
-        return converter.convert(rules);
+        return serializer.serializeArray(rules).getRaw();
     }
 }

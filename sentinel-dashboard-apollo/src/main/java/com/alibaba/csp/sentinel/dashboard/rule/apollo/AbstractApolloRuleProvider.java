@@ -2,7 +2,8 @@ package com.alibaba.csp.sentinel.dashboard.rule.apollo;
 
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.RuleEntity;
 import com.alibaba.csp.sentinel.dashboard.rule.AbstractRuleProvider;
-import com.alibaba.csp.sentinel.datasource.Converter;
+import com.alibaba.csp.sentinel.dashboard.rule.RuleEntityStringSerializer;
+import com.alibaba.csp.sentinel.dashboard.rule.StringSerialRuleEntity;
 import com.alibaba.csp.sentinel.util.StringUtil;
 import com.ctrip.framework.apollo.openapi.client.ApolloOpenApiClient;
 import com.ctrip.framework.apollo.openapi.dto.OpenItemDTO;
@@ -15,12 +16,12 @@ public abstract class AbstractApolloRuleProvider<T extends RuleEntity> extends A
 
     protected ApolloProperty property;
     protected ApolloOpenApiClient apiClient;
-    protected Converter<String, List<T>> ruleEntityDecoder;
+    protected RuleEntityStringSerializer<T> serializer;
 
-    public AbstractApolloRuleProvider(ApolloProperty property, ApolloOpenApiClient apiClient, Converter<String, List<T>> ruleEntityDecoder) {
+    public AbstractApolloRuleProvider(ApolloProperty property, ApolloOpenApiClient apiClient, RuleEntityStringSerializer<T> serializer) {
         this.property = property;
         this.apiClient = apiClient;
-        this.ruleEntityDecoder = ruleEntityDecoder;
+        this.serializer = serializer;
     }
 
     public ApolloProperty getProperty() {
@@ -48,7 +49,7 @@ public abstract class AbstractApolloRuleProvider<T extends RuleEntity> extends A
         if (StringUtil.isEmpty(rulsString)) {
             return new ArrayList<>();
         }
-        return parseRules(rulsString);
+        return parseRules(rulsString,null,null,-1);
     }
 
     protected String getRulesString(String appName) {
@@ -64,12 +65,14 @@ public abstract class AbstractApolloRuleProvider<T extends RuleEntity> extends A
         return rulsString;
     }
 
-    protected List<T> parseRules(String rulsString) {
-        return ruleEntityDecoder.convert(rulsString);
-    }
 
     protected List<T> parseRules(String rulsString, String appName, String ip, Integer port) {
-        return parseRules(rulsString);
+        StringSerialRuleEntity serialRuleEntity=new StringSerialRuleEntity();
+        serialRuleEntity.setRaw(rulsString);
+        serialRuleEntity.setApp(appName);
+        serialRuleEntity.setIp(ip);
+        serialRuleEntity.setPort(port);
+        return serializer.deserializeArray(serialRuleEntity);
     }
 
     protected abstract String getRuleDateId(String appName);

@@ -15,18 +15,22 @@
  */
 package com.alibaba.csp.sentinel.dashboard.datasource.entity.rule;
 
-import java.util.Date;
 
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
 
 /**
  * @author leyou
  */
-public class DegradeRuleEntity implements RuleEntity {
-    private Long id;
-    private String app;
-    private String ip;
-    private Integer port;
+//public class DegradeRuleEntity implements RuleEntity {
+public class DegradeRuleEntity extends AbstractRuleEntity<DegradeRule> {
+
+//    private Long id;
+//    private String app;
+//    private String ip;
+//    private Integer port;
+//    private Date gmtCreate;
+//    private Date gmtModified;
+
     private String resource;
     private String limitApp;
     private Double count;
@@ -35,8 +39,7 @@ public class DegradeRuleEntity implements RuleEntity {
      * 0 rt 限流; 1为异常;
      */
     private Integer grade;
-    private Date gmtCreate;
-    private Date gmtModified;
+
 
     public static DegradeRuleEntity fromDegradeRule(String app, String ip, Integer port, DegradeRule rule) {
         DegradeRuleEntity entity = new DegradeRuleEntity();
@@ -51,42 +54,42 @@ public class DegradeRuleEntity implements RuleEntity {
         return entity;
     }
 
-    @Override
-    public String getIp() {
-        return ip;
-    }
+//    @Override
+//    public String getIp() {
+//        return ip;
+//    }
+//
+//    public void setIp(String ip) {
+//        this.ip = ip;
+//    }
+//
+//    @Override
+//    public Integer getPort() {
+//        return port;
+//    }
+//
+//    public void setPort(Integer port) {
+//        this.port = port;
+//    }
 
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
+//    @Override
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    @Override
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
-    @Override
-    public Integer getPort() {
-        return port;
-    }
-
-    public void setPort(Integer port) {
-        this.port = port;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public String getApp() {
-        return app;
-    }
-
-    public void setApp(String app) {
-        this.app = app;
-    }
+//    @Override
+//    public String getApp() {
+//        return app;
+//    }
+//
+//    public void setApp(String app) {
+//        this.app = app;
+//    }
 
     public String getResource() {
         return resource;
@@ -128,22 +131,22 @@ public class DegradeRuleEntity implements RuleEntity {
         this.grade = grade;
     }
 
-    @Override
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = gmtModified;
-    }
+//    @Override
+//    public Date getGmtCreate() {
+//        return gmtCreate;
+//    }
+//
+//    public void setGmtCreate(Date gmtCreate) {
+//        this.gmtCreate = gmtCreate;
+//    }
+//
+//    public Date getGmtModified() {
+//        return gmtModified;
+//    }
+//
+//    public void setGmtModified(Date gmtModified) {
+//        this.gmtModified = gmtModified;
+//    }
 
     @Override
     public DegradeRule toRule() {
@@ -154,5 +157,10 @@ public class DegradeRuleEntity implements RuleEntity {
         rule.setTimeWindow(timeWindow);
         rule.setGrade(grade);
         return rule;
+    }
+
+    @Override
+    public AbstractRuleEntity fromRule(String app, String ip, Integer port, DegradeRule rule) {
+        return DegradeRuleEntity.fromDegradeRule(app,ip,port,rule);
     }
 }

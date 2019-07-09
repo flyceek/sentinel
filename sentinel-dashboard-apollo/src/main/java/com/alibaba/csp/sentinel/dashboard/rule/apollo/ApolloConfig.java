@@ -15,10 +15,10 @@
  */
 package com.alibaba.csp.sentinel.dashboard.rule.apollo;
 
-import com.alibaba.csp.sentinel.dashboard.datasource.entity.MachineEntity;
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.*;
+import com.alibaba.csp.sentinel.dashboard.rule.RuleEntityStringSerializer;
+import com.alibaba.csp.sentinel.dashboard.rule.StringSerialRuleEntity;
 import com.alibaba.csp.sentinel.datasource.Converter;
-import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.fastjson.JSON;
 import com.ctrip.framework.apollo.openapi.client.ApolloOpenApiClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,73 +37,88 @@ public class ApolloConfig {
     @Autowired
     private ApolloProperty property;
 
+//    @Bean
+//    public Converter<List<FlowRuleEntity>, String> flowRuleEntityEncoder() {
+//        return JSON::toJSONString;
+//    }
+//
+//    @Bean
+//    public Converter<String, List<FlowRuleEntity>> flowRuleEntityDecoder() {
+//        return s -> JSON.parseArray(s, FlowRuleEntity.class);
+//    }
+//
+//
+//    @Bean
+//    public Converter<List<DegradeRuleEntity>, String> degradeRuleEntityEncoder() {
+//        return JSON::toJSONString;
+//    }
+//
+//    @Bean
+//    public Converter<String, List<DegradeRuleEntity>> degradeRuleEntityDecoder() {
+//        return s -> JSON.parseArray(s, DegradeRuleEntity.class);
+//    }
+//
+//    @Bean
+//    public Converter<List<ParamFlowRuleEntity>, String> paramFlowRuleEntityEncoder() {
+//        return JSON::toJSONString;
+//    }
+//
+//    @Bean
+//    public Converter<String, List<ParamFlowRuleEntity>> paramFlowRuleEntityDecoder() {
+//        return s -> JSON.parseArray(s, ParamFlowRuleEntity.class);
+//    }
+//
+//    @Bean
+//    public Converter<List<SystemRuleEntity>, String> systemRuleEntityEncoder() {
+//        return JSON::toJSONString;
+//    }
+//
+//    @Bean
+//    public Converter<String, List<SystemRuleEntity>> systemRuleEntityDecoder() {
+//        return s -> JSON.parseArray(s, SystemRuleEntity.class);
+//    }
+//
+//    @Bean
+//    public Converter<List<AuthorityRuleEntity>, String> authorityRuleEntityEncoder() {
+//        return JSON::toJSONString;
+//    }
+//
+//    @Bean
+//    public Converter<String, List<AuthorityRuleEntity>> authorityRuleEntityDecoder() {
+//        return s -> JSON.parseArray(s, AuthorityRuleEntity.class);
+//    }
+
     @Bean
-    public Converter<List<FlowRule>, String> flowRuleEncoder() {
-        return JSON::toJSONString;
+    public RuleEntityStringSerializer<FlowRuleEntity> apolloFlowRuleEntityStringSerializer() {
+        return new ApolloFlowRuleEntityStringSerializer();
     }
 
     @Bean
-    public Converter<List<FlowRuleEntity>, String> flowRuleEntityEncoder() {
-        return JSON::toJSONString;
+    public RuleEntityStringSerializer<DegradeRuleEntity> apolloDegradeRuleEntityStringSerializer() {
+        return new ApolloDegradeRuleEntityStringSerializer();
     }
 
     @Bean
-    public Converter<String, List<FlowRuleEntity>> flowRuleEntityDecoder() {
-        return s -> JSON.parseArray(s, FlowRuleEntity.class);
+    public RuleEntityStringSerializer<AuthorityRuleEntity> apolloAuthorityRuleEntityStringSerializer() {
+        return new ApolloAuthorityRuleEntityStringSerializer();
     }
 
     @Bean
-    public Converter<String,List<FlowRule>> flowRuleDecoder() {
-        return s -> JSON.parseArray(s, FlowRule.class);
-    }
-
-
-    @Bean
-    public Converter<List<DegradeRuleEntity>, String> degradeRuleEntityEncoder() {
-        return JSON::toJSONString;
+    public RuleEntityStringSerializer<ParamFlowRuleEntity> apolloParamFlowRuleEntityStringSerializer() {
+        return new ApolloParamFlowRuleEntityStringSerializer();
     }
 
     @Bean
-    public Converter<String, List<DegradeRuleEntity>> degradeRuleEntityDecoder() {
-        return s -> JSON.parseArray(s, DegradeRuleEntity.class);
-    }
-
-    @Bean
-    public Converter<List<ParamFlowRuleEntity>, String> paramFlowRuleEntityEncoder() {
-        return JSON::toJSONString;
-    }
-
-    @Bean
-    public Converter<String, List<ParamFlowRuleEntity>> paramFlowRuleEntityDecoder() {
-        return s -> JSON.parseArray(s, ParamFlowRuleEntity.class);
-    }
-
-    @Bean
-    public Converter<List<SystemRuleEntity>, String> systemRuleEntityEncoder() {
-        return JSON::toJSONString;
-    }
-
-    @Bean
-    public Converter<String, List<SystemRuleEntity>> systemRuleEntityDecoder() {
-        return s -> JSON.parseArray(s, SystemRuleEntity.class);
-    }
-
-    @Bean
-    public Converter<List<AuthorityRuleEntity>, String> authorityRuleEntityEncoder() {
-        return JSON::toJSONString;
-    }
-
-    @Bean
-    public Converter<String, List<AuthorityRuleEntity>> authorityRuleEntityDecoder() {
-        return s -> JSON.parseArray(s, AuthorityRuleEntity.class);
+    public RuleEntityStringSerializer<SystemRuleEntity> apolloSystemRuleEntityStringSerializer() {
+        return new ApolloSystemRuleEntityStringSerializer();
     }
 
     @Bean
     public ApolloOpenApiClient apolloOpenApiClient() {
         ApolloOpenApiClient client = ApolloOpenApiClient.newBuilder()
-            .withPortalUrl(property.portalUrl)
-            .withToken(property.token)
-            .build();
+                .withPortalUrl(property.portalUrl)
+                .withToken(property.token)
+                .build();
         return client;
     }
 

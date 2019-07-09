@@ -17,25 +17,27 @@ package com.alibaba.csp.sentinel.dashboard.datasource.entity.rule;
 
 import java.util.Date;
 
+import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowRule;
 import com.alibaba.csp.sentinel.slots.system.SystemRule;
 
 /**
  * @author leyou
  */
-public class SystemRuleEntity implements RuleEntity {
+//public class SystemRuleEntity implements RuleEntity {
+public class SystemRuleEntity extends AbstractRuleEntity<SystemRule> {
 
-    private Long id;
+//    private Long id;
+//    private String app;
+//    private String ip;
+//    private Integer port;
 
-    private String app;
-    private String ip;
-    private Integer port;
     private Double avgLoad;
     private Long avgRt;
     private Long maxThread;
     private Double qps;
 
-    private Date gmtCreate;
-    private Date gmtModified;
+//    private Date gmtCreate;
+//    private Date gmtModified;
 
     public static SystemRuleEntity fromSystemRule(String app, String ip, Integer port, SystemRule rule) {
         SystemRuleEntity entity = new SystemRuleEntity();
@@ -49,42 +51,42 @@ public class SystemRuleEntity implements RuleEntity {
         return entity;
     }
 
-    @Override
-    public String getIp() {
-        return ip;
-    }
-
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
-
-    @Override
-    public Integer getPort() {
-        return port;
-    }
-
-    public void setPort(Integer port) {
-        this.port = port;
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Override
-    public String getApp() {
-        return app;
-    }
-
-    public void setApp(String app) {
-        this.app = app;
-    }
+//    @Override
+//    public String getIp() {
+//        return ip;
+//    }
+//
+//    public void setIp(String ip) {
+//        this.ip = ip;
+//    }
+//
+//    @Override
+//    public Integer getPort() {
+//        return port;
+//    }
+//
+//    public void setPort(Integer port) {
+//        this.port = port;
+//    }
+//
+//    @Override
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    @Override
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    @Override
+//    public String getApp() {
+//        return app;
+//    }
+//
+//    public void setApp(String app) {
+//        this.app = app;
+//    }
 
     public Double getAvgLoad() {
         return avgLoad;
@@ -118,22 +120,22 @@ public class SystemRuleEntity implements RuleEntity {
         this.qps = qps;
     }
 
-    @Override
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = gmtModified;
-    }
+//    @Override
+//    public Date getGmtCreate() {
+//        return gmtCreate;
+//    }
+//
+//    public void setGmtCreate(Date gmtCreate) {
+//        this.gmtCreate = gmtCreate;
+//    }
+//
+//    public Date getGmtModified() {
+//        return gmtModified;
+//    }
+//
+//    public void setGmtModified(Date gmtModified) {
+//        this.gmtModified = gmtModified;
+//    }
 
     @Override
     public SystemRule toRule() {
@@ -143,5 +145,10 @@ public class SystemRuleEntity implements RuleEntity {
         rule.setMaxThread(maxThread);
         rule.setQps(qps);
         return rule;
+    }
+
+    @Override
+    public AbstractRuleEntity fromRule(String app, String ip, Integer port, SystemRule rule) {
+        return SystemRuleEntity.fromSystemRule(app,ip,port,rule);
     }
 }

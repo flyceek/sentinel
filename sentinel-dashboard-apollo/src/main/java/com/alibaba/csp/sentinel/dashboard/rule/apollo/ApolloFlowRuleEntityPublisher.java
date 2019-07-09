@@ -16,6 +16,7 @@
 package com.alibaba.csp.sentinel.dashboard.rule.apollo;
 
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.FlowRuleEntity;
+import com.alibaba.csp.sentinel.dashboard.rule.RuleEntityStringSerializer;
 import com.alibaba.csp.sentinel.datasource.Converter;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.fastjson.JSON;
@@ -31,27 +32,29 @@ import java.util.stream.Collectors;
  * @author hantianwei@gmail.com
  * @since 1.5.0
  */
-@Component("flowRuleApolloProvider")
-public class FlowRuleApolloProvider extends AbstractApolloRuleProvider<FlowRuleEntity> {
+@Component("flowRuleApolloPublisher")
+public class ApolloFlowRuleEntityPublisher extends AbstractApolloRulePublisher<FlowRuleEntity> {
 
-    public FlowRuleApolloProvider(@Autowired ApolloProperty property, @Autowired ApolloOpenApiClient apiClient, @Autowired Converter<String, List<FlowRuleEntity>> converter) {
-        super(property, apiClient, converter);
+    @Autowired
+    public ApolloFlowRuleEntityPublisher(ApolloOpenApiClient apiClient, RuleEntityStringSerializer<FlowRuleEntity> serializer, ApolloProperty property) {
+        super(apiClient, serializer, property);
+    }
+
+    @Override
+    protected List<FlowRuleEntity> prepareRules(List<FlowRuleEntity> rules) {
+//        for (FlowRuleEntity ruleEntity : rules) {
+//            ruleEntity.setId(null);
+//            ruleEntity.setApp(null);
+//            ruleEntity.setGmtModified(null);
+//            ruleEntity.setGmtCreate(null);
+//            ruleEntity.setIp(null);
+//            ruleEntity.setPort(null);
+//        }
+        return rules;
     }
 
     @Override
     protected String getRuleDateId(String appName) {
         return ApolloConfigUtil.getFlowDataId(getProperty().appId);
-    }
-
-    @Override
-    protected List<FlowRuleEntity> parseRules(String rulsString, String appName, String ip, Integer port) {
-        List<FlowRule> flowRules = JSON.parseArray(rulsString, FlowRule.class);
-        if (null == flowRules || flowRules.size() < 1) {
-            return new ArrayList<>();
-        }
-        List<FlowRuleEntity> flowRuleEntities = flowRules.stream()
-                .map(x -> FlowRuleEntity.fromFlowRule(appName, ip, port, x))
-                .collect(Collectors.toList());
-        return flowRuleEntities;
     }
 }

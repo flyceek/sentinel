@@ -23,12 +23,16 @@ import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 /**
  * @author leyou
  */
-public class FlowRuleEntity implements RuleEntity {
+//public class FlowRuleEntity implements RuleEntity {
 
-    private Long id;
-    private String app;
-    private String ip;
-    private Integer port;
+public class FlowRuleEntity extends AbstractRuleEntity<FlowRule> {
+//    private Long id;
+//    private String app;
+//    private String ip;
+//    private Integer port;
+//    private Date gmtCreate;
+//    private Date gmtModified;
+
     private String limitApp;
     private String resource;
     /**
@@ -57,8 +61,7 @@ public class FlowRuleEntity implements RuleEntity {
      */
     private ClusterFlowConfig clusterConfig;
 
-    private Date gmtCreate;
-    private Date gmtModified;
+
 
     public static FlowRuleEntity fromFlowRule(String app, String ip, Integer port, FlowRule rule) {
         FlowRuleEntity entity = new FlowRuleEntity();
@@ -79,42 +82,42 @@ public class FlowRuleEntity implements RuleEntity {
         return entity;
     }
 
-    @Override
-    public String getIp() {
-        return ip;
-    }
+//    @Override
+//    public String getIp() {
+//        return ip;
+//    }
 
-    public void setIp(String ip) {
-        this.ip = ip;
-    }
+//    public void setIp(String ip) {
+//        this.ip = ip;
+//    }
 
-    @Override
-    public Integer getPort() {
-        return port;
-    }
+//    @Override
+//    public Integer getPort() {
+//        return port;
+//    }
 
-    public void setPort(Integer port) {
-        this.port = port;
-    }
+//    public void setPort(Integer port) {
+//        this.port = port;
+//    }
 
-    @Override
-    public String getApp() {
-        return app;
-    }
+//    @Override
+//    public String getApp() {
+//        return app;
+//    }
 
-    public void setApp(String app) {
-        this.app = app;
-    }
+//    public void setApp(String app) {
+//        this.app = app;
+//    }
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
+//    @Override
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    @Override
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
 
     public String getLimitApp() {
         return limitApp;
@@ -206,22 +209,22 @@ public class FlowRuleEntity implements RuleEntity {
         return this;
     }
 
-    @Override
-    public Date getGmtCreate() {
-        return gmtCreate;
-    }
-
-    public void setGmtCreate(Date gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
-
-    public Date getGmtModified() {
-        return gmtModified;
-    }
-
-    public void setGmtModified(Date gmtModified) {
-        this.gmtModified = gmtModified;
-    }
+//    @Override
+//    public Date getGmtCreate() {
+//        return gmtCreate;
+//    }
+//
+//    public void setGmtCreate(Date gmtCreate) {
+//        this.gmtCreate = gmtCreate;
+//    }
+//
+//    public Date getGmtModified() {
+//        return gmtModified;
+//    }
+//
+//    public void setGmtModified(Date gmtModified) {
+//        this.gmtModified = gmtModified;
+//    }
 
     @Override
     public FlowRule toRule() {
@@ -244,6 +247,11 @@ public class FlowRuleEntity implements RuleEntity {
         flowRule.setClusterMode(clusterMode);
         flowRule.setClusterConfig(clusterConfig);
         return flowRule;
+    }
+
+    @Override
+    public AbstractRuleEntity fromRule(String app, String ip, Integer port, FlowRule rule) {
+        return FlowRuleEntity.fromFlowRule(app,ip,port,rule);
     }
 
 }

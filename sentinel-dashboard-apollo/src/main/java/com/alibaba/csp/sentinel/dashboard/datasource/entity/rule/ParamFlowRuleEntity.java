@@ -23,7 +23,6 @@ import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowItem;
 import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowRule;
 import com.alibaba.csp.sentinel.util.AssertUtil;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * @author Eric Zhao
@@ -44,6 +43,11 @@ public class ParamFlowRuleEntity extends AbstractRuleEntity<ParamFlowRule> {
         entity.setIp(ip);
         entity.setPort(port);
         return entity;
+    }
+
+    @Override
+    public AbstractRuleEntity fromRule(String app, String ip, Integer port, ParamFlowRule rule) {
+        return ParamFlowRuleEntity.fromAuthorityRule(app,ip,port,rule);
     }
 
 //    @JsonIgnore
