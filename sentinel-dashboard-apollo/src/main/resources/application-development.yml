@@ -20,15 +20,15 @@ spring:
 #        port: 8719
 #        dashboard: ${server.address}:${server.port}
 
-csp:
-  sentinel:
-    dashboard:
-      server: ${server.address}:${server.port}
-    api:
-      port: 8719
-    heartbeat:
-      interval:
-        ms: 10000
+#csp:
+#  sentinel:
+#    dashboard:
+#      server: ${server.address}:${server.port}
+#    api:
+#      port: 8719
+#    heartbeat:
+#      interval:
+#        ms: 10000
 
 #sentinel:
 ##    autoRemoveMachineMillis: 30000

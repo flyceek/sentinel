@@ -47,6 +47,11 @@
             <artifactId>sentinel-parameter-flow-control</artifactId>
             <version>${sentinel.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-api-gateway-adapter-common</artifactId>
+            <version>${sentinel.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
