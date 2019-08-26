@@ -38,6 +38,7 @@ auth:
   filter:
     exclude-urls: '/,/auth/login,/auth/logout,/registry/machine,/version'
     exclude-url-suffixes: 'htm,html,js,css,map,ico,ttf,woff,png'
+  enabled: true
   username: sentinel
   password: sentinel
 
