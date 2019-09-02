@@ -52,8 +52,8 @@ logging:
 
 apollo:
   cluster: default
-  appId: sentinel-dashboard
-  portalUrl: http://10.4.99.4:18076
+  appId: centaline-ex-service
+  portalUrl: http://10.28.19.87:18076
   nameSpace: application
-  env: DEV
-  token: 6916de41ea47568c519f69f1a9998f7156fcfee6
+  env: PRO
+  token: 42040cdb2ab12a1f9dded5ce0b03557f090f00fc
