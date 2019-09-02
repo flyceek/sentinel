@@ -42,6 +42,10 @@ auth:
   username: sentinel
   password: sentinel
 
+sentinel:
+  dashboard:
+    version: 1.6.2
+
 logging:
   file: '${user.home}/logs/csp/sentinel-dashboard.log'
   level:
