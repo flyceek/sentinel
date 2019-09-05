@@ -24,7 +24,7 @@
         <!--        <powermock.version>2.0.0</powermock.version>-->
 
         <!--        &lt;!&ndash; Build &ndash;&gt;-->
-        <!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!--        <java.source.version>1.7</java.source.version>-->
         <!--        <java.target.version>1.7</java.target.version>-->
         <!--        <java.encoding>UTF-8</java.encoding>-->

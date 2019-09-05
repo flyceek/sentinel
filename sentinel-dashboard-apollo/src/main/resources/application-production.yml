@@ -8,7 +8,7 @@ server:
 
 spring:
   application:
-    name: agency
+    name: sentinel-dashboard-apollo
   http:
     encoding:
       force: true
@@ -20,39 +20,49 @@ spring:
 #        port: 8719
 #        dashboard: ${server.address}:${server.port}
 
-csp:
-  sentinel:
-    dashboard:
-      server: ${server.address}:${server.port}
-    api:
-      port: 8719
-    heartbeat:
-      interval:
-        ms: 10000
+#csp:
+#  sentinel:
+#    dashboard:
+#      server: ${server.address}:${server.port}
+#    api:
+#      port: 8719
+#    heartbeat:
+#      interval:
+#        ms: 10000
 
-sentinel:
-  #    autoRemoveMachineMillis: 30000
-  version: ${project.version}
+#sentinel:
+##    autoRemoveMachineMillis: 30000
+#    version: ${project.version}
 
 auth:
   filter:
     exclude-urls: '/,/auth/login,/auth/logout,/registry/machine,/version'
     exclude-url-suffixes: 'htm,html,js,css,map,ico,ttf,woff,png'
+  enabled: true
   username: sentinel
   password: sentinel
 
+project:
+  version: 1.6.2
+
+sentinel:
+  dashboard:
+    version: ${project.version}
+
 logging:
-  file: '${user.home}/logs/csp/sentinel-dashboard.log'
+  file: ${user.home}/logs/csp/sentinel-dashboard.log
   level:
-    org.springframework.web: INFO
+    org:
+      springframework:
+        web: INFO
   pattern:
-    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
     console: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
 
 apollo:
   cluster: default
-  appId: sentinel-dashboard
-  portalUrl: http://10.4.99.4:18076
+  appId: centaline-ex-service
+  portalUrl: http://10.28.19.87:18076
   nameSpace: application
-  env: DEV
-  token: 6916de41ea47568c519f69f1a9998f7156fcfee6
+  env: PRO
+  token: 42040cdb2ab12a1f9dded5ce0b03557f090f00fc

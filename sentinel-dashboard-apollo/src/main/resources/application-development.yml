@@ -8,7 +8,7 @@ server:
 
 spring:
   application:
-    name: agency
+    name: sentinel-dashboard-apollo
   http:
     encoding:
       force: true
@@ -42,17 +42,22 @@ auth:
   username: sentinel
   password: sentinel
 
+project:
+  version: 1.6.2
+
 sentinel:
   dashboard:
-    version: 1.6.2
+    version: ${project.version}
 
 logging:
-  file: '${user.home}/logs/csp/sentinel-dashboard.log'
+  file: ${user.home}/logs/csp/sentinel-dashboard.log
   level:
-    org.springframework.web: INFO
+    org:
+      springframework:
+        web: INFO
   pattern:
-    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
     console: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
+    file: '%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n'
 
 apollo:
   cluster: default

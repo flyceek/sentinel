@@ -17,10 +17,8 @@ package com.alibaba.csp.sentinel.dashboard.datasource.entity.gateway;
 
 import com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayFlowRule;
 import com.alibaba.csp.sentinel.adapter.gateway.common.rule.GatewayParamFlowItem;
-import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.AbstractRuleEntity;
 import com.alibaba.csp.sentinel.dashboard.datasource.entity.rule.RuleEntity;
 import com.alibaba.csp.sentinel.slots.block.Rule;
-import com.alibaba.csp.sentinel.slots.block.authority.AuthorityRule;
 
 import java.util.Date;
 import java.util.Objects;
