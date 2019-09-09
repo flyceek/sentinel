@@ -18,8 +18,9 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <spring.boot.version>2.0.5.RELEASE</spring.boot.version>
         <curator.version>4.0.1</curator.version>
-        <sentinel.version>1.6.2</sentinel.version>
+        <fastjson.version>1.2.58</fastjson.version>
 
+        <sentinel.version>1.6.3</sentinel.version>
         <tomcat.warFile>${project.build.directory}/${project.build.finalName}.war</tomcat.warFile>
         <tomcat.url />
         <tomcat.username />
@@ -105,16 +106,16 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.58</version>
+            <version>${fastjson.version}</version>
         </dependency>
 
         <!-- for Nacos rule publisher sample -->
-        <dependency>
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-datasource-nacos</artifactId>
-            <version>${sentinel.version}</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.csp</groupId>-->
+<!--            <artifactId>sentinel-datasource-nacos</artifactId>-->
+<!--            <version>${sentinel.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
 <!--        <dependency>-->
 <!--            <groupId>com.alibaba.csp</groupId>-->
 <!--            <artifactId>sentinel-datasource-apollo</artifactId>-->

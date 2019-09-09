@@ -43,7 +43,7 @@ auth:
   password: sentinel
 
 project:
-  version: 1.6.2
+  version: 1.6.3
 
 sentinel:
   dashboard:
