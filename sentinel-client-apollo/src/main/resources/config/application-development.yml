@@ -59,8 +59,8 @@ csp:
         ip: '10.104.5.38'
     dashboard:
       server: 'http://10.104.9.91:8085'
-#    api:
-#      port: 8719
+    api:
+      port: 8719
 
 #hystrix:
 #  command:
