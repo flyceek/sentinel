@@ -2,4 +2,4 @@
 
 ## Documentation
 
-Sentine Dashboard Apollo 版.
+Sentinel Dashboard Apollo 版.
